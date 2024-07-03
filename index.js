@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 // Middleware function (converts string to json format)
 app.use(express.json());
+app.use(middleware);
+app.use(requestLogger);
 
 let courses = [
     {id : 1, name : 'java'},
@@ -22,14 +24,18 @@ app.post('/courses', (req, res) => {
 // Update id 1, name : name --> spring
 // Delete id 2 course;
 app.put('/courses', (req, res) => {
-    const id = req.body.id;
-    const name = req.body.name;
-    for (let j=0; j<courses.length; j++){
-        if (courses[j].id === id){
-            courses[j].name = name;
+    try {
+        const id = req.body.id;
+        const name = req.body.name;
+        for (let j=0; j<courses.length; j++){
+            if (courses[j].id === id){
+                courses[j].name = name;
+            }
         }
+        res.send(courses);
+    } catch (err) {
+        res.status(505).send(err);
     }
-    res.send(courses);
 })
 
 app.delete('/courses', (req, res) => {
@@ -41,6 +47,21 @@ app.delete('/courses', (req, res) => {
     }
     res.send(courses);
 })
+
+// Creating Custom Middlewear
+function middleware(req, res, next){
+    console.log("called");
+    next();
+}
+// logger middleware
+// method, ip, hostname, date
+function requestLogger(req, res, next){
+    console.log(req.ip);
+    console.log(req.hostname);
+    console.log(req.method);
+    console.log(new Date().toISOString());
+    next();
+}
 const host = 'localhost';
 const port = 3000;
 
