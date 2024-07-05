@@ -1,5 +1,14 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
+
+mongoose.connect("mongodb+srv://abhishekshah5486:DJcl8vvHR43BRlQ5@cluster0.j9ind8t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+.then (() => {
+    console.log("DB Connected.");
+}).catch((err) => {
+    console.log("Failed", err);
+})
+
 // Middleware function (converts string to json format)
 app.use(express.json());
 app.use(middleware);
@@ -9,7 +18,7 @@ let courses = [
     {id : 1, name : 'java'},
     {id : 2, name : 'javascript'},
     {id : 3, name : 'python'}
-];
+];6
 app.get('/courses', (req, res) => {
     res.json(courses);
 });
