@@ -77,3 +77,23 @@ const port = 3000;
 app.listen(port, () => {
     console.log('Server has started.');
 })
+
+// Product Schema
+const productSchema = new mongoose.Schema({
+    product_name : {
+        type : String,
+        required : true
+    },
+    product_price : {
+        type : String,
+        required : true
+    },
+    isInStock : {
+        type : Boolean,
+        required : true
+    },
+    catgegory : {
+        type : String,
+        required : true
+    }
+});
