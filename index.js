@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const productRoutes = require('./Routes/product.routes');
+const userRoutes = require('./Routes/user.routes');
 
 require('dotenv').config();
 const app = express();
@@ -15,6 +16,7 @@ mongoose.connect(process.env.MONGO_URL)
 // Middleware function (converts string to json format)
 app.use(express.json());
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 // app.use(middleware);
 // app.use(requestLogger);
 

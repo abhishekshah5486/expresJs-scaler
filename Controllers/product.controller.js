@@ -28,5 +28,5 @@ exports.updateProductById = async (req, res) => {
 
 exports.deletedProductById = async (req, res) => {
     const deletedProduct = await productModel.findByIdAndDelete(req.params.id);
-    return res.json(deletedProduct);s
+    return res.json(deletedProduct);
 }
