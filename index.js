@@ -73,62 +73,6 @@ app.use(express.json());
 //     console.log(new Date().toISOString());
 //     next();
 // }
-// Product Schema
-const productSchema = new mongoose.Schema({
-    product_name : {
-        type : String,
-        required : true
-    },
-    product_price : {
-        type : String,
-        required : true
-    },
-    isInStock : {
-        type : Boolean,
-        required : true
-    },
-    category : {
-        type : String,
-        required : true
-    }
-});
-const productModel = mongoose.model("products", productSchema);
-// Create a product
-app.post('/api/products', async (req, res) =>{
-    const body = req.body;
-    const product = await productModel.create({
-        product_name : req.body.product_name,
-        product_price : req.body.product_price,
-        isInStock : req.body.isInStock,
-        category : req.body.category
-    })
-    console.log(product);
-    return res.status(201).json({message : 'Product Created Successfully.'});
-})
-
-// Get all products
-app.get('/api/products', async (req, res) => {
-    const allProducts = await productModel.find({});
-    return res.status(200).json({message: 'Products fetched successfully', allProducts});
-})
-
-// Get a product by product id
-app.get('/api/products/:id', async (req, res) => {
-    const product = await productModel.findById(req.params.id);
-    return res.json(product);
-})
-
-// Update Product Details
-app.put('/api/products/:id', async (req, res) => {
-    const updatedProduct = await productModel.findByIdAndUpdate(req.params.id, req.body);
-    return res.json(updatedProduct);
-})
-
-// Delete a product by id
-app.delete('/api/products/:id', async (req, res) => {
-    const deletedProduct = await productModel.findByIdAndDelete(req.params.id);
-    return res.json(deletedProduct);s
-})
 const host = 'localhost';
 const port = 3000;
 
@@ -136,3 +80,7 @@ app.listen(port, () => {
     console.log('Server has started.');
 
 })
+
+
+// MVC Architecture
+// Models View Controller
