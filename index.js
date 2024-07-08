@@ -104,11 +104,17 @@ app.post('/api/products', async (req, res) =>{
     return res.status(201).json({message : 'Product Created Successfully.'});
 })
 
+// Get all products
 app.get('/api/products', async (req, res) => {
     const allProducts = await productModel.find({});
     return res.status(200).json({message: 'Products fetched successfully', allProducts});
 })
 
+// Get a product by product id
+app.get('/api/products/:id', async (req, res) => {
+    const product = await productModel.findById(req.params.id);
+    return res.json(product);
+})
 // Update Product Details
 app.put('/api/products/:id', async (req, res) => {
     const updatedProduct = await productModel.findByIdAndUpdate(req.params.id, req.body);
