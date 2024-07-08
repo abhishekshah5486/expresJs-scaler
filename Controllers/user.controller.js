@@ -5,7 +5,7 @@ exports.createUser = async (req, res) => {
     const createdUser = await userModel.create({
         username: req.body.username,
         email: req.body.email,
-        password: req.body.email,
+        password: req.body.password,
     });
 
     return res.status(201).json(createdUser);
