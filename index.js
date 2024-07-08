@@ -115,10 +115,17 @@ app.get('/api/products/:id', async (req, res) => {
     const product = await productModel.findById(req.params.id);
     return res.json(product);
 })
+
 // Update Product Details
 app.put('/api/products/:id', async (req, res) => {
     const updatedProduct = await productModel.findByIdAndUpdate(req.params.id, req.body);
     return res.json(updatedProduct);
+})
+
+// Delete a product by id
+app.delete('/api/products/:id', async (req, res) => {
+    const deletedProduct = await productModel.findByIdAndDelete(req.params.id);
+    return res.json(deletedProduct);s
 })
 const host = 'localhost';
 const port = 3000;
